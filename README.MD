@@ -14,21 +14,10 @@ Web-интерфейс для управления WireMock: просмотр л
 - Java `17+`
 - Maven `3.9+`
 
-Проверка:
-```
-java -version
-mvn -version
-```
-
 ### Frontend
 - Node.js `18+`
-- npm `9+` (или pnpm/yarn по вкусу)
+- npm `9+`
 
-Проверка:
-```
-node -v
-npm -v
-```
 
 ---
 
@@ -38,7 +27,6 @@ npm -v
 root
  ├─ backend/        # Spring Boot
  ├─ frontend/       # React + Vite
- ├─ wiremock/       # mappings + __files (если используются)
  └─ README.md
 ```
 
@@ -54,66 +42,6 @@ cd wiremock-web-ui
 
 ---
 
-## Первичная настройка
-
-### Backend конфигурация
-
-Файл:
-```
-backend/src/main/resources/application.yml
-```
-
-Минимальный пример:
-
-```
-server:
-  port: 8082
-
-wiremock:
-  embedded:
-    enabled: true
-    port: 8081
-    options:
-      port: 8081
-      root-dir: "${user.home}/wiremock-data"
-      global-response-templating: true
-      disable-banner: true
-
-  base-url: "http://127.0.0.1:${wiremock.embedded.port}"
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
-```
-
-Что это значит:
-- `embedded.enabled=true` — backend сам поднимет WireMock
-- `root-dir` — папка с `mappings` и `__files`
-
-Создай структуру (если её нет):
-```
-mkdir -p wiremock/mappings
-mkdir -p wiremock/__files
-```
-
----
-
-### Frontend конфигурация
-
-По умолчанию фронт ходит в backend по:
-```
-/api/*
-```
-
-Если backend не на `localhost:8080`, смотри:
-```
-frontend/vite.config.ts
-```
-
----
-
 ## Сборка
 
 ### Backend
@@ -121,12 +49,6 @@ frontend/vite.config.ts
 cd backend
 mvn clean package
 ```
-
-После сборки:
-```
-backend/target/*.jar
-```
-
 ---
 
 ### Frontend
@@ -135,15 +57,9 @@ cd frontend
 npm install
 npm run build
 ```
-
-Сборка попадёт в:
-```
-frontend/dist
-```
-
 ---
 
-## Запуск (DEV режим)
+## Запуск
 
 ### 1\. Backend
 ```
@@ -155,109 +71,20 @@ mvn spring-boot:run
 ```
 java -jar target/*.jar
 ```
-
-Backend поднимется:
-```
-http://localhost:8080
-```
-
 ---
 
-### 2\. Frontend (dev)
+### 2\. Frontend
 ```
 cd frontend
 npm install
 npm run dev
 ```
-
-Открой:
-```
-http://localhost:5173
-```
-
----
-
-## Запуск (production)
-
-### Backend
-```
-cd backend
-mvn clean package
-java -jar target/*.jar
-```
-
-### Frontend
-```
-cd frontend
-npm run build
-```
-
-Скопируй содержимое:
-```
-frontend/dist
-```
-в:
-```
-backend/src/main/resources/static
-```
-
-Пересобери backend:
-```
-mvn clean package
-```
-
-Теперь UI будет доступен прямо с backend:
-```
-http://localhost:8080
-```
-
 ---
 
 ## WireMock embedded
-
-Если включён:
+При необходимости можно выключить встроенный wiremock-standalone и использовать внешний wiremock-сервер:
 ```
-wiremock.embedded.enabled=true
-```
-
-то backend автоматически поднимет WireMock standalone.
-
-Папка:
-```
-wiremock/
- ├─ mappings
- └─ __files
-```
-
----
-
-## Основные endpoints
-
-### Backend API
-```
-GET  /api/requests
-POST /api/requests/find
-DELETE /api/requests
-
-GET  /api/mappings
-POST /api/mappings
-PUT  /api/mappings/{id}
-DELETE /api/mappings/{id}
-POST /api/mappings/save
-```
-
----
-
-## Типичный запуск одной командой (DEV)
-
-Backend:
-```
-cd backend && mvn spring-boot:run
-```
-
-Frontend:
-```
-cd frontend && npm run dev
+wiremock.embedded.enabled=false
 ```
 
 ---
