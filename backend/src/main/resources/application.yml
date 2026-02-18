@@ -1,0 +1,18 @@
+server:
+  port: 8082
+
+wiremock:
+  embedded:
+    enabled: true
+    options:
+      port: 8081
+      root-dir: "${user.home}/wiremock-data"
+      disable-banner: true
+
+  base-url: "http://127.0.0.1:${wiremock.embedded.options.port}"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

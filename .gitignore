@@ -1,0 +1,154 @@
+############################
+# OS / Editor junk
+############################
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+
+############################
+# IntelliJ IDEA
+############################
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.idea_modules/
+
+############################
+# VS Code
+############################
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+############################
+# Java / Maven / Spring Boot
+############################
+target/
+**/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+*.log
+
+# Spring Boot runtime files
+hs_err_pid*
+replay_pid*
+
+# Build tools
+.mvn/wrapper/maven-wrapper.jar
+# If you want to keep wrapper, comment the line above and keep:
+# !.mvn/wrapper/maven-wrapper.jar
+# !.mvn/wrapper/maven-wrapper.properties
+
+############################
+# Gradle (if ever appears)
+############################
+.gradle/
+build/
+**/build/
+
+############################
+# Node / Frontend (React/Vite/TS)
+############################
+node_modules/
+**/node_modules/
+
+dist/
+**/dist/
+build/
+**/build/
+
+# Vite cache
+.vite/
+**/.vite/
+
+# Next/nuxt/etc (just in case)
+.next/
+.nuxt/
+.output/
+
+# Package managers
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# Lockfiles (choose your policy)
+# Usually keep ONE lockfile in repo; uncomment the ones you do NOT use:
+package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+############################
+# TypeScript / tooling caches
+############################
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+.cache/
+**/.cache/
+
+############################
+# Tests / Coverage
+############################
+coverage/
+**/coverage/
+*.lcov
+
+############################
+# Env / secrets / local configs
+############################
+.env
+.env.*
+!.env.example
+
+# Local app configs (keep templates if any)
+application-local.yml
+application-local.yaml
+application-local.properties
+
+############################
+# WireMock runtime data (optional)
+############################
+# If WireMock mappings/__files are generated locally and should NOT be committed:
+wiremock/__files/
+wiremock/mappings/
+# If you actually store mappings in repo, delete the two lines above.
+
+############################
+# Logs
+############################
+logs/
+**/logs/
+*.log
+*.log.*
+
+############################
+# Docker / containers
+############################
+docker-compose.override.yml
+
+############################
+# Misc
+############################
+*.jar
+*.war
+*.ear
+
+# If you generate OpenAPI / docs artifacts locally:
+openapi/
+swagger/
